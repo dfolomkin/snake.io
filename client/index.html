@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WebSocket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="reset.css" rel="stylesheet" type="text/css" />
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="screen">
+      <div class="battlefield">
+        <div class="battlefield_layer">
+          <canvas id="bg" width="300" height="300"></canvas>
+        </div>
+        <div class="battlefield_layer">
+          <canvas id="food" width="300" height="300"></canvas>
+        </div>
+        <div class="battlefield_layer">
+          <canvas id="snakes" width="300" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="client.js"></script>
+  </body>
+</html>

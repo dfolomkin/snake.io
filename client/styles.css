@@ -1,0 +1,17 @@
+.screen {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.battlefield {
+  position: relative;
+}
+
+.battlefield_layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: aquamarine;
+}
