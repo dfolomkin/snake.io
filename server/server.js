@@ -8,6 +8,12 @@ const KEYS = {
   left: 'ArrowLeft',
   right: 'ArrowRight'
 };
+const DIRECTIONS = {
+  up: 'dirUp',
+  down: 'dirDown',
+  left: 'dirLeft',
+  right: 'dirRight'
+};
 const FIELD_DIMS = {
   rows: 60,
   cols: 60,
@@ -15,6 +21,18 @@ const FIELD_DIMS = {
 };
 
 const model = {};
+const state = {
+  players: [
+    {
+      id: 000,
+      fieldInstance: [[]],
+      head: { row: 0, col: 0 },
+      direction: DIRECTIONS.left,
+      nextDirection: ''
+    }
+  ],
+  field: [[]]
+};
 
 app.use((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -45,6 +63,8 @@ io.on('connection', socket => {
   // );
 
   // field[0][0] = true;
+
+  socket.on('start', () => {});
 
   socket.on('control', ({ key, clientId }) => {
     switch (key) {
