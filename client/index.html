@@ -12,15 +12,17 @@
     <div class="screen">
       <div class="battlefield">
         <div class="battlefield_layer">
-          <canvas id="bg" width="300" height="300"></canvas>
+          <canvas id="canvas-bg" width="300" height="300"></canvas>
         </div>
         <div class="battlefield_layer">
-          <canvas id="food" width="300" height="300"></canvas>
+          <canvas id="canvas-food" width="300" height="300"></canvas>
         </div>
         <div class="battlefield_layer">
-          <canvas id="snakes" width="300" height="300"></canvas>
+          <canvas id="canvas-snakes" width="300" height="300"></canvas>
         </div>
       </div>
+      <input id="input-name" type="text" />
+      <button id="btn-start">Start</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>

@@ -26,6 +26,7 @@ const state = {
     {
       id: 000,
       fieldInstance: [[]],
+      color: 'rgb(100, 100, 100)',
       head: { row: 0, col: 0 },
       direction: DIRECTIONS.left,
       nextDirection: ''
@@ -34,28 +35,38 @@ const state = {
   field: [[]]
 };
 
+const clients = [];
+
+let timer;
+
 app.use((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 });
 
 io.on('connection', socket => {
-  let clientId;
+  socket.on('clientConnect', () => {
+    console.log(`Client ${socket.id} is connected`);
 
-  socket.on('init', clientId => {
-    console.log(`Client ${clientId} is connected`);
+    if (Object.keys(io.sockets.sockets).length === 1) {
+      timer = setInterval(() => {
+        for (s in io.sockets.sockets) {
+          io.to(s).emit('modelUpdate', model);
+        }
+      }, 200);
+    }
 
-    io.emit('fieldInit', {
+    socket.emit('fieldInit', {
       height: FIELD_DIMS.rows * FIELD_DIMS.scale,
       width: FIELD_DIMS.cols * FIELD_DIMS.scale,
       scale: FIELD_DIMS.scale
     });
 
-    model[clientId] = {
-      position: { row: 0, col: 0 },
-      score: 0
-    };
+    // model[clientId] = {
+    //   position: { row: 0, col: 0 },
+    //   score: 0
+    // };
 
-    io.emit('modelUpdate', model);
+    // socket.emit('modelUpdate', model);
   });
 
   // const field = new Array(FIELD_DIMS.height).map(
@@ -97,7 +108,10 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', function() {
-    console.log(`Connection ${clientId} has been closed`);
+    console.log(`Connection ${socket.id} has been closed`);
+    if (!Object.keys(io.sockets.sockets).length) {
+      clearInterval(timer);
+    }
   });
 });
 
